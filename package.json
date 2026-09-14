@@ -1,0 +1,7 @@
+{
+  "name": "lunae-tarot-astrology",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": { "start": "node server.js", "dev": "node --watch dev-server.js", "check": "node --check server.js && node --check app.js" },
+  "engines": { "node": ">=20" }
+}

@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Tarot ve astrolojiyle kişisel farkındalık deneyimi" />
+  <title>Lunae — Tarot & Astroloji</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="selection.css" />
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <header class="site-header"><a class="brand" href="#" aria-label="Lunae ana sayfa"><span class="brand-mark">☽</span>LUNAE</a><span class="header-note">Kişisel farkındalık alanı</span></header>
+  <main class="shell">
+    <section class="step active" id="welcomeStep">
+      <p class="eyebrow">TAROT × ASTROLOJİ</p>
+      <h1>Aklındaki soruyu<br /><em>sor.</em></h1>
+      <p class="lead">Sorunu anlamaya, sana uygun açılımı bulmaya ve sembolleri gökyüzünün diliyle birlikte okumaya davetliyiz.</p>
+      <form id="questionForm" class="question-box">
+        <label for="question">Bugün neyi netleştirmek istiyorsun?</label>
+        <textarea id="question" minlength="8" maxlength="500" placeholder="Örn. Mevcut işimde kalmalı mıyım, yoksa yeni teklife mi yönelmeliyim?" required></textarea>
+        <div class="form-footer"><span id="charCount">0 / 500</span><button class="primary" type="submit">Yolculuğu başlat <span>→</span></button></div>
+      </form>
+      <p class="disclaimer">Bu deneyim kararlarının yerine geçmez; düşünmek için güvenli bir alan sunar.</p>
+    </section>
+
+    <section class="step" id="spreadStep">
+      <button class="back" data-back="welcomeStep">← Sorumu düzenle</button>
+      <p class="eyebrow">01 — SORUNU ANLIYORUZ</p>
+      <h2>Bu sorunun <em>ritmi</em></h2>
+      <div class="analysis-card"><div id="qualityMessage" class="quality-message"></div><div class="tags" id="analysisTags"></div><p id="spreadReason"></p></div>
+      <p class="section-label">Sana önerimiz</p>
+      <div class="spread-grid" id="spreadGrid"></div>
+      <button class="primary next-button" id="confirmSpread">Bu açılımla devam et <span>→</span></button>
+    </section>
+
+    <section class="step" id="birthStep">
+      <button class="back" data-back="spreadStep">← Açılımı değiştir</button>
+      <p class="eyebrow">02 — GÖKYÜZÜNÜN BAĞLAMI</p>
+      <h2>Sana ait birkaç<br /><em>iz</em></h2>
+      <p class="step-intro">Bu bilgiler yalnızca bu yorum için kullanılır; kaydedilmez.</p>
+      <form id="birthForm" class="birth-form">
+        <div class="field"><label for="birthDate">Doğum tarihi</label><input id="birthDate" type="date" required /></div>
+        <div class="field"><label for="birthTime">Doğum saati <small>(isteğe bağlı)</small></label><input id="birthTime" type="time" /></div>
+        <div class="field wide"><label for="birthPlace">Doğum yeri</label><input id="birthPlace" type="text" placeholder="Örn. İstanbul, Türkiye" required /></div>
+        <label class="toggle-row" id="partnerToggle"><input type="checkbox" id="hasPartner" /> <span class="toggle"></span> Bu soru iki kişi arasındaki bir bağla ilgili</label>
+        <div id="partnerFields" class="partner-fields hidden">
+          <p>Diğer kişinin bilgileri <small>(varsa)</small></p>
+          <div class="field"><label for="partnerDate">Doğum tarihi</label><input id="partnerDate" type="date" /></div>
+          <div class="field"><label for="partnerTime">Doğum saati</label><input id="partnerTime" type="time" /></div>
+          <div class="field wide"><label for="partnerPlace">Doğum yeri</label><input id="partnerPlace" type="text" placeholder="Şehir, ülke" /></div>
+        </div>
+        <button class="primary" type="submit">Kartları hazırla <span>✦</span></button>
+      </form>
+      <p class="data-note">Canlı astrolojik veri entegrasyonu, üretim sürümünde güvenilir bir ephemeris sağlayıcısından alınmalıdır.</p>
+    </section>
+
+    <section class="step" id="drawStep">
+      <p class="eyebrow">03 — AÇILIM</p><h2>Kartlarını <em>sen</em> seç.</h2>
+      <p class="step-intro" id="drawInstruction"></p>
+      <div class="selection-summary"><span id="selectionCount">0 kart seçildi</span><button id="completeSelection" class="primary" disabled>Yoruma geç <span>→</span></button></div>
+      <div class="drawn-cards" id="drawnCards"></div>
+      <p class="section-label card-library-label">Kapalı deste — 78 kartın tamamı</p>
+      <div class="card-library" id="cardLibrary"></div>
+    </section>
+
+    <section class="step" id="resultStep">
+      <p class="eyebrow">04 — SENTEZ</p><h2>Gökyüzü ve kartların<br /><em>ortak dili.</em></h2>
+      <div class="result-question" id="resultQuestion"></div>
+      <section class="result-section"><h3>Genel değerlendirme</h3><p id="generalResult"></p></section>
+      <section class="result-section"><h3>Tarot açılımı</h3><div id="tarotResult" class="interpretation-list"></div></section>
+      <section class="result-section astro-section"><div><h3>Astrolojik tema</h3><div id="astroProfile" class="astro-profile"></div><p id="astroResult"></p></div><span class="astro-symbol">☿</span></section>
+      <section class="result-section"><h3>Ortak temalar</h3><p id="themesResult"></p></section>
+      <section class="reflection"><span>✦</span><div><p class="section-label">DÜŞÜNMEN İÇİN</p><p id="reflectionResult"></p></div></section>
+      <details class="why"><summary>Bu yorum neden böyle oluştu?</summary><p id="whyResult"></p></details>
+      <p class="ethics">Bu yorum sembolik bir farkındalık çalışmasıdır. Sağlık, hukuk ve finans gibi önemli konularda uzman desteğini esas al.</p>
+      <button class="secondary" id="restart">Yeni bir soru sor</button>
+    </section>
+  </main>
+  <footer>© 2026 LUNAE <span>•</span> Yargısız bir düşünme alanı</footer>
+  <script src="app.js"></script>
+</body>
+</html>

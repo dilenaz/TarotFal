@@ -1,0 +1,11 @@
+
+# Local configuration and generated files
+.env
+.env.*
+!.env.example
+node_modules/
+.next/
+desktop.ini
+*.log
+*.tsbuildinfo
+
